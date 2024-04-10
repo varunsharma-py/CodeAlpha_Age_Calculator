@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Age Calculator</title>
+<style>
+    body {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color:blanchedalmond;
+    }
+    form {
+        background-color: aquamarine;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    label {
+        font-weight: bold;
+        color: #555;
+    }
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #333;
+    }
+</style>
+</head>
+<body>
+<form id="ageCalculatorForm">
+    <h2>Age Calculator</h2>
+    <label for="dob">Enter your Date of Birth:</label><br>
+    <input type="date" id="dob" required><br><br>
+    <button type="submit">Calculate Age</button>
+    <div id="result"></div>
+</form>
+
+<script>
+    document.getElementById('ageCalculatorForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var dobInput = document.getElementById('dob').value;
+        var dob = new Date(dobInput);
+        var now = new Date();
+        var age = now.getFullYear() - dob.getFullYear();
+
+        // Adjust age if birthday hasn't occurred yet this year
+        if (now.getMonth() < dob.getMonth() || (now.getMonth() === dob.getMonth() && now.getDate() < dob.getDate())) {
+            age--;
+        }
+
+        document.getElementById('result').innerText = "Your age is: " + age + " years";
+    });
+</script>
+</body>
+</html>
